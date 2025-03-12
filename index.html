@@ -250,18 +250,35 @@ document.addEventListener('mousemove', (e) => {
     </script>
 
 <script>
-document.addEventListener('mousemove', (e) => {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
+
+const cursor = document.createElement("div");
+cursor.classList.add("cursor");
+document.body.appendChild(cursor);
+
+
+document.addEventListener("mousemove", (e) => {
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+
+    createParticle(e.clientX, e.clientY);
+});
+
+
+function createParticle(x, y) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
     document.body.appendChild(particle);
-    
-    particle.style.left = `${e.clientX}px`;
-    particle.style.top = `${e.clientY}px`;
-    
+
+
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+
+
     setTimeout(() => {
         particle.remove();
-    }, 500); // Particles fade out after 500ms
-});
+    }, 500);
+}
+
 </script>
 
 
