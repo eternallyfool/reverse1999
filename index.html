@@ -150,6 +150,22 @@ body {
 a, button {
     cursor: none !important;
 }
+@media (max-width: 768px) {
+    .custom-cursor, .particle-container {
+        display: none !important;
+    }
+}
+.touch-effect {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.5s ease-out;
+    pointer-events: none;
+}
     </style>
 </head>
 <body>
@@ -161,6 +177,7 @@ a, button {
         <source src="1999bgm2.mp3" type="audio/mpeg">
     </audio>
 <div class="cursor"></div>
+<div class="touch-effect"></div>
 
     <div class="profile-container">
         <img src="vertin.png" alt="Profile Picture">
@@ -281,6 +298,22 @@ function createParticle(x, y) {
         cursor.style.transform = "scale(1)";
     });
 });
+</script>
+<script>
+if ("ontouchstart" in window) {  
+    document.addEventListener("touchstart", (e) => {
+        let touchEffect = document.querySelector(".touch-effect");
+        touchEffect.style.left = `${e.touches[0].clientX - 25}px`;
+        touchEffect.style.top = `${e.touches[0].clientY - 25}px`;
+        touchEffect.style.transform = "scale(1)";
+        touchEffect.style.opacity = "1";
+
+        setTimeout(() => {
+            touchEffect.style.opacity = "0";
+            touchEffect.style.transform = "scale(0)";
+        }, 300);
+    });
+}
 </script>
 
 
