@@ -108,18 +108,27 @@
             color: #FFD700;
         }
 
-        /* Circle Cursor */
-        .circle-cursor {
-            position: fixed;
-            width: 15px;
-            height: 15px;
-            background-color: rgba(255, 215, 0, 0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s linear;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-        }
+.particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    animation: fadeOut 0.5s linear;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
     </style>
 </head>
 <body>
@@ -130,6 +139,7 @@
     <audio autoplay loop>
         <source src="1999bgm2.mp3" type="audio/mpeg">
     </audio>
+<div class="cursor"></div>
 
     <div class="profile-container">
         <img src="vertin.png" alt="Profile Picture">
@@ -214,14 +224,27 @@
 </script>
 
 <script>
-        let cursor = document.createElement("div");
-        cursor.classList.add("circle-cursor");
-        document.body.appendChild(cursor);
+const cursor = document.querySelector('.cursor');
 
-        document.addEventListener("mousemove", function(e) {
-            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        });
+document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
     </script>
+
+<script>
+document.addEventListener('mousemove', (e) => {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    document.body.appendChild(particle);
+    
+    particle.style.left = `${e.clientX}px`;
+    particle.style.top = `${e.clientY}px`;
+    
+    setTimeout(() => {
+        particle.remove();
+    }, 500); // Particles fade out after 500ms
+});
+</script>
 
 
 </body>
