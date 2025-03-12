@@ -108,6 +108,23 @@
             color: #FFD700;
         }
 
+body {
+    cursor: none; /* Hide default cursor */
+}
+
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 215, 0, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s ease-out;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    z-index: 9999;
+}
+
 .particle {
     position: fixed;
     width: 8px;
