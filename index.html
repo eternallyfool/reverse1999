@@ -109,10 +109,10 @@
         }
 
 body {
-    cursor: none; /* Hide default cursor */
+    cursor: none; 
 }
 
-.animated-cursor {
+.cursor {
     position: fixed;
     width: 20px;
     height: 20px;
@@ -120,17 +120,31 @@ body {
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    transition: transform 0.1% linear;
-    z-index: 10000;
-    animation: glow 1s infinite alternate;
+    transition: transform 0.05s ease-out;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    z-index: 10000; 
 }
 
-@keyframes glow {
+.particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 50%;
+    pointer-events: none; 
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    animation: fadeOut 0.5s linear;
+    z-index: 1; 
+}
+
+@keyframes fadeOut {
     from {
-        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        opacity: 1;
+        transform: scale(1);
     }
     to {
-        box-shadow: 0 0 15px rgba(255, 215, 0, 1);
+        opacity: 0;
+        transform: scale(2);
     }
 }
     </style>
@@ -228,15 +242,33 @@ body {
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let cursor = document.createElement("div");
-        cursor.classList.add("animated-cursor");
-        document.body.appendChild(cursor);
+const cursor = document.createElement("div");
+cursor.classList.add("cursor");
+document.body.appendChild(cursor);
 
-        document.addEventListener("mousemove", function(e) {
-            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-        });
-    });
+
+document.addEventListener("mousemove", (e) => {
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+
+    createParticle(e.clientX, e.clientY);
+});
+
+
+function createParticle(x, y) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+    document.body.appendChild(particle);
+
+
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+
+
+    setTimeout(() => {
+        particle.remove();
+    }, 500);
+}
 </script>
 
 
