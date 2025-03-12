@@ -1,0 +1,205 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse: 1999 - Profile</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: #EAC67A;
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .profile-container {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 40px;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            border: 2px solid #EAC67A;
+            box-shadow: 0 0 20px #EAC67A;
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #EAC67A;
+            box-shadow: 0 0 15px #EAC67A;
+            transition: 0.4s ease-in-out;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #FFD700;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+
+        .character-name {
+            color: #EAC67A;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: 0.3s;
+        }
+
+        .character-name:hover {
+            color: #FFD700;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #111;
+            background: #EAC67A;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #FFD700;
+            box-shadow: 0 0 15px #FFD700;
+        }
+
+        .copy-text {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .copy-text:hover {
+            color: #FFD700;
+        }
+
+    </style>
+</head>
+<body>
+
+    <video autoplay loop muted>
+        <source src="1999bg.mp4" type="video/mp4">
+    </video>
+    <audio autoplay loop>
+        <source src="1999bgm2.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="profile-container">
+        <img src="vertin.png" alt="Profile Picture">
+        <h1>DazaiOsamu</h1>
+        <p><b>UID:</b> <span class="copy-text" onclick="copyUID()">408871949</span></p>
+        <p><b>Motto:</b> "Death is a part of life"</p>
+        <p><b>Favorite Characters:</b> 
+            <span class="character-name" onclick="playVoice('voyager', this)">Voyager</span>, 
+            <span class="character-name" onclick="playVoice('six', this)">6</span>, 
+            <span class="character-name" onclick="playVoice('wingsong', this)">Wingsong</span>
+        </p>
+        <button class="button" onclick="location.href='https://re1999.bluepoch.com/en/home/'">Reverse: 1999</button>
+    </div>
+
+
+    <script>
+        const voyagerVoices = [
+            "https://static.wikia.nocookie.net/reverse1999/images/5/52/Voyager_Suitcase_Climate.ogg/revision/latest?cb=20231112015304",
+            "https://static.wikia.nocookie.net/reverse1999/images/2/2d/Voyager_Morning.ogg/revision/latest?cb=20231112015302",
+            "https://static.wikia.nocookie.net/reverse1999/images/4/49/Voyager_Night.ogg/revision/latest?cb=20231112015303",
+            "https://static.wikia.nocookie.net/reverse1999/images/f/f8/Voyager_Clothing_and_Torso.ogg/revision/latest?cb=20231112015256",
+            "https://static.wikia.nocookie.net/reverse1999/images/c/ca/Voyager_Hobby.ogg/revision/latest?cb=20231112015259",
+            "https://static.wikia.nocookie.net/reverse1999/images/6/64/Voyager_Intimacy.ogg/revision/latest?cb=20231112015300",
+            "https://static.wikia.nocookie.net/reverse1999/images/9/94/Voyager_Monologue.ogg/revision/latest?cb=20231112015301",
+            "https://static.wikia.nocookie.net/reverse1999/images/c/c2/Voyager_Bottom_Insight.ogg/revision/latest?cb=20241009082909"
+        ];
+
+        const sixVoices = [
+            "https://static.wikia.nocookie.net/reverse1999/images/8/87/6_Idle.ogg/revision/latest?cb=20240614045535",
+            "https://static.wikia.nocookie.net/reverse1999/images/9/91/6_Sleeves_and_Hands.ogg/revision/latest?cb=20240614045535",
+            "https://static.wikia.nocookie.net/reverse1999/images/6/68/6_Praise.ogg/revision/latest?cb=20240614045536",
+            "https://static.wikia.nocookie.net/reverse1999/images/2/2f/6_Chitchat_1.ogg/revision/latest?cb=20240614045537",
+            "https://static.wikia.nocookie.net/reverse1999/images/b/b2/6_Monologue.ogg/revision/latest?cb=20240614045536",
+            "https://static.wikia.nocookie.net/reverse1999/images/2/24/6_Deploy.ogg/revision/latest?cb=20240614045535",
+            "https://static.wikia.nocookie.net/reverse1999/images/2/2e/6_Select_Incantation.ogg/revision/latest?cb=20240614045535",
+            "https://static.wikia.nocookie.net/reverse1999/images/d/d9/6_Cast_Skill_2.ogg/revision/latest?cb=20240614045536",
+            "https://static.wikia.nocookie.net/reverse1999/images/7/7f/6_Insight.ogg/revision/latest?cb=20240614045535",
+            "https://static.wikia.nocookie.net/reverse1999/images/b/b7/6_Cast_Skill.ogg/revision/latest?cb=20240614045536"        ];
+
+        const wingsongVoices = [];
+
+        let currentAudio = null;
+
+        function playVoice(character, element) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            let voiceList = character === 'voyager' ? voyagerVoices :
+                            character === 'six' ? sixVoices : wingsongVoices;
+
+            if (voiceList.length === 0) {
+                ;
+                return;
+            }
+
+            let randomIndex = Math.floor(Math.random() * voiceList.length);
+            currentAudio = new Audio(voiceList[randomIndex]);
+            currentAudio.play();
+        }
+
+        function copyUID() {
+            const uid = "408871949";
+            navigator.clipboard.writeText(uid).then(() => {
+                alert("UID copied: " + uid);
+            }).catch(err => {
+                alert("Failed to copy UID");
+                console.error("Copy error:", err);
+            });
+        }
+    </script>
+
+
+<script>
+    document.addEventListener("click", function() {
+        let bgm = new Audio("1999bgm2.mp3");
+        bgm.loop = true;
+        bgm.volume = 0.3;
+        bgm.play().catch(error => console.log("Autoplay blocked:", error));
+    }, { once: true }); // Ensures it only runs once
+</script>
+
+</body>
+</html>
