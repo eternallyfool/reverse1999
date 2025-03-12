@@ -147,11 +147,8 @@ body {
         transform: scale(2);
     }
 }
-a, button {
-    cursor: none !important;
-}
 @media (max-width: 768px) {
-    .custom-cursor, .particle-container {
+    .custom-cursor {
         display: none !important;
     }
 }
@@ -159,13 +156,30 @@ a, button {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: rgba(255, 215, 0, 0.5);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     transform: scale(0);
     opacity: 0;
-    transition: transform 0.3s ease-out, opacity 0.5s ease-out;
+    transition: transform 0.3s, opacity 0.3s;
     pointer-events: none;
 }
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fadeOut 0.5s linear forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+
     </style>
 </head>
 <body>
@@ -302,19 +316,42 @@ function createParticle(x, y) {
 <script>
 if ("ontouchstart" in window) {  
     document.addEventListener("touchstart", (e) => {
-        let touchEffect = document.querySelector(".touch-effect");
+        let touchEffect = document.createElement("div");
+        touchEffect.className = "touch-effect";
+        document.body.appendChild(touchEffect);
+        
         touchEffect.style.left = `${e.touches[0].clientX - 25}px`;
         touchEffect.style.top = `${e.touches[0].clientY - 25}px`;
-        touchEffect.style.transform = "scale(1)";
         touchEffect.style.opacity = "1";
+        touchEffect.style.transform = "scale(1)";
 
         setTimeout(() => {
             touchEffect.style.opacity = "0";
             touchEffect.style.transform = "scale(0)";
+            touchEffect.remove();
         }, 300);
     });
+
+    document.addEventListener("touchmove", (e) => {
+        e.preventDefault();  
+        for (let i = 0; i < 3; i++) { 
+            let particle = document.createElement("div");
+            particle.className = "particle";
+            document.body.appendChild(particle);
+            
+            let size = Math.random() * 10 + 5;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${e.touches[0].clientX + (Math.random() * 10 - 5)}px`;
+            particle.style.top = `${e.touches[0].clientY + (Math.random() * 10 - 5)}px`;
+            
+            setTimeout(() => particle.remove(), 500);
+        }
+    });
 }
+
 </script>
+
 
 
 </body>
