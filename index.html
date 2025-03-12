@@ -147,6 +147,9 @@ body {
         transform: scale(2);
     }
 }
+a, button {
+    cursor: none !important;
+}
     </style>
 </head>
 <body>
@@ -269,6 +272,15 @@ function createParticle(x, y) {
         particle.remove();
     }, 500);
 }
+</script>
+<script>document.querySelectorAll("a, button").forEach((element) => {
+    element.addEventListener("mouseenter", () => {
+        cursor.style.transform = "scale(1.5)";
+    });
+    element.addEventListener("mouseleave", () => {
+        cursor.style.transform = "scale(1)";
+    });
+});
 </script>
 
 
