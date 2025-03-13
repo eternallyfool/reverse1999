@@ -96,7 +96,7 @@
 
         .button:hover {
             background: #FFD700;
-            box-shadow: 0 0 15px #FFD700;
+            box-shadow: 0 0 5px #FFD700;
         }
 
         .copy-text {
@@ -125,32 +125,39 @@ body {
     z-index: 10000; /* Cursor is always on top */
 }
 
-.particle {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    background: rgba(255, 215, 0, 0.5);
-    border-radius: 50%;
-    pointer-events: none; /* Ensures particles don't block clicks */
-    box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-    animation: fadeOut 0.5s linear;
-    z-index: 1; /* Particles stay below cursor */
-}
 
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: scale(1);
-    }
-    to {
-        opacity: 0;
-        transform: scale(2);
-    }
-}
 
 a, button, .copy-text, .character-name {
     cursor: none !important; /* Hide default pointer */
 }
+
+@media (max-width: 768px) {
+    .cursor {
+        display: none;
+    }
+    body {
+        cursor: auto;
+    }
+}
+
+#mute-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #EAC67A;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background 0.3s;
+}
+
+#mute-btn:hover {
+    background: rgba(255, 215, 0, 0.8);
+}
+
+
 
     </style>
 </head>
@@ -177,6 +184,8 @@ a, button, .copy-text, .character-name {
         </p>
         <button class="button" onclick="location.href='https://re1999.bluepoch.com/en/home/'">Reverse: 1999</button>
     </div>
+    <div id="mute-btn" onclick="toggleMute()">🔊</div>
+
 
 
     <script>
@@ -258,24 +267,8 @@ document.addEventListener("mousemove", (e) => {
     cursor.style.left = `${e.clientX}px`;
     cursor.style.top = `${e.clientY}px`;
 
-    createParticle(e.clientX, e.clientY);
 });
 
-// Create particles effect
-function createParticle(x, y) {
-    const particle = document.createElement("div");
-    particle.classList.add("particle");
-    document.body.appendChild(particle);
-
-    // Set position
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-
-    // Animate and remove after fading out
-    setTimeout(() => {
-        particle.remove();
-    }, 500);
-}
 
 </script>
 <script>
@@ -288,7 +281,27 @@ document.querySelectorAll("a, button, .copy-text, .character-name").forEach((ele
     });
 });
 </script>
+<script>
+if (window.innerWidth <= 768) {
+    document.body.style.scrollBehavior = "smooth";
+}
+</script>
+<script>
+let bgm = new Audio("1999bgm2.mp3");
+bgm.loop = true;
+bgm.volume = 0.3;
+bgm.play().catch(error => console.log("Autoplay blocked:", error));
 
+function toggleMute() {
+    if (bgm.muted) {
+        bgm.muted = false;
+        document.getElementById("mute-btn").textContent = "🔊";
+    } else {
+        bgm.muted = true;
+        document.getElementById("mute-btn").textContent = "🔇";
+    }
+}
+</script>
 
 
 </body>
