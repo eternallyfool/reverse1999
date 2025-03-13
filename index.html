@@ -139,7 +139,13 @@ a, button, .copy-text, .character-name {
         cursor: auto;
     }
 }
-
+video {
+    transform: translateY(0);
+    transition: transform 0.2s ease-out;
+}
+.profile-container:hover {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+}
 
     </style>
 </head>
@@ -278,6 +284,13 @@ document.addEventListener("visibilitychange", () => {
     } else {
         bgm.play();
     }
+});
+</script>
+
+<script>
+document.addEventListener("scroll", function() {
+    let scrollY = window.scrollY;
+    document.querySelector("video").style.transform = `translateY(${scrollY * 0.2}px)`;
 });
 </script>
 
