@@ -162,6 +162,27 @@ video {
     transform: translateY(0);
     transition: transform 0.2s ease-out;
 }
+.touch-effect {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 215, 0, 0.6); /* Golden color */
+    border-radius: 50%;
+    transform: scale(1);
+    animation: ripple 0.4s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
 
 
     </style>
@@ -309,6 +330,36 @@ document.addEventListener("scroll", function() {
     let scrollY = window.scrollY;
     document.querySelector("video").style.transform = `translateY(${scrollY * 0.2}px)`;
 });
+</script>
+<script>
+document.addEventListener("click", (event) => {
+    // Create ripple element
+    let ripple = document.createElement("div");
+    ripple.classList.add("touch-effect");
+
+    // Set position
+    ripple.style.left = `${event.clientX}px`;
+    ripple.style.top = `${event.clientY}px`;
+
+    // Append to body
+    document.body.appendChild(ripple);
+
+    // Remove after animation
+    setTimeout(() => {
+        ripple.remove();
+    }, 400);
+
+    // Play click sound
+    playClickSound();
+});
+
+// Click Sound Function
+function playClickSound() {
+    let clickSound = new Audio("click.mp3"); // Use your own click sound file
+    clickSound.volume = 0.3;
+    clickSound.play().catch((err) => console.log("Click sound error:", err));
+}
+
 </script>
 
 
