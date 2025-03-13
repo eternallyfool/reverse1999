@@ -248,12 +248,17 @@ a, button, .copy-text, .character-name {
 
 
 <script>
-    document.addEventListener("click", function() {
-        let bgm = new Audio("1999bgm2.mp3");
+   let bgm; // Declare bgm globally
+
+document.addEventListener("click", function() {
+    if (!bgm) { // Prevent multiple audio instances
+        bgm = new Audio("1999bgm2.mp3");
         bgm.loop = true;
         bgm.volume = 0.3;
         bgm.play().catch(error => console.log("Autoplay blocked:", error));
-    }, { once: true }); // Ensures it only runs once
+    }
+}, { once: true });
+
 </script>
 
 <script>
@@ -293,14 +298,12 @@ bgm.volume = 0.3;
 bgm.play().catch(error => console.log("Autoplay blocked:", error));
 
 function toggleMute() {
-    if (bgm.muted) {
-        bgm.muted = false;
-        document.getElementById("mute-btn").textContent = "🔊";
-    } else {
-        bgm.muted = true;
-        document.getElementById("mute-btn").textContent = "🔇";
+    if (bgm) { // Ensure bgm exists before muting
+        bgm.muted = !bgm.muted;
+        document.getElementById("mute-btn").textContent = bgm.muted ? "🔇" : "🔊";
     }
 }
+
 </script>
 
 
