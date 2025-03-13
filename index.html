@@ -148,8 +148,8 @@ body {
     }
 }
 
-a, button {
-    cursor: none !important; /* Ensures default pointer does NOT appear */
+a, button, .copy-text, .character-name {
+    cursor: none !important; /* Hide default pointer */
 }
 
     </style>
@@ -279,7 +279,7 @@ function createParticle(x, y) {
 
 </script>
 <script>
-document.querySelectorAll("a, button").forEach((element) => {
+document.querySelectorAll("a, button, .copy-text, .character-name").forEach((element) => {
     element.addEventListener("mouseenter", () => {
         cursor.style.transform = "scale(1.5)"; /* Enlarge cursor on hover */
     });
