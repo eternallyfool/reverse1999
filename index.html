@@ -148,10 +148,6 @@ a, button, .copy-text, .character-name {
     <video autoplay loop muted>
         <source src="reverse1999bgv.mp4" type="video/mp4">
     </video>
-    <audio autoplay loop>
-        <source src="1999bgm2.mp3" type="audio/mpeg">
-    </audio>
-
 
 
     <div class="profile-container">
@@ -230,11 +226,13 @@ a, button, .copy-text, .character-name {
 
 
 <script>
-   let bgm; // Declare bgm globally
+let bgm; // Declare bgm globally
 
 document.addEventListener("click", function() {
     if (!bgm) { // Prevent multiple audio instances
-        bgm = new Audio("1999bgm2.mp3");
+        const bgmList = ["1999bgm2.mp3", "1999bgm1.mp3"]; // Add second BGM
+        const randomBgm = bgmList[Math.floor(Math.random() * bgmList.length)];
+        bgm = new Audio(randomBgm);
         bgm.loop = true;
         bgm.volume = 0.3;
         bgm.play().catch(error => console.log("Autoplay blocked:", error));
@@ -272,6 +270,15 @@ document.querySelectorAll("a, button, .copy-text, .character-name").forEach((ele
 if (window.innerWidth <= 768) {
     document.body.style.scrollBehavior = "smooth";
 }
+</script>
+<script>
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        bgm.pause();
+    } else {
+        bgm.play();
+    }
+});
 </script>
 
 
