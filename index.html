@@ -147,14 +147,10 @@ body {
         transform: scale(2);
     }
 }
-@media (max-width: 768px) {
-    .custom-cursor {
-        display: none !important;
-    }
+
+a, button {
+    cursor: none !important; /* Ensures default pointer does NOT appear */
 }
-
-
-
 
     </style>
 </head>
@@ -279,6 +275,16 @@ function createParticle(x, y) {
         particle.remove();
     }, 500);
 }
+</script>
+<script>
+document.querySelectorAll("a, button").forEach((element) => {
+    element.addEventListener("mouseenter", () => {
+        cursor.style.transform = "scale(1.5)"; /* Enlarge cursor on hover */
+    });
+    element.addEventListener("mouseleave", () => {
+        cursor.style.transform = "scale(1)"; /* Reset size when leaving */
+    });
+});
 </script>
 
 
