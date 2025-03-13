@@ -81,23 +81,42 @@
             color: #FFD700;
         }
 
-        .button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 18px;
-            color: #111;
-            background: #EAC67A;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #111;
+    background: linear-gradient(45deg, #EAC67A, #FFD700);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
 
-        .button:hover {
-            background: #FFD700;
-            box-shadow: 0 0 5px #FFD700;
-        }
+.button::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.button:hover {
+    background: linear-gradient(45deg, #FFD700, #EAC67A);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.button:hover::before {
+    opacity: 1;
+}
 
         .copy-text {
             cursor: pointer;
