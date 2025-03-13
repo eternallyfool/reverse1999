@@ -140,24 +140,6 @@ a, button, .copy-text, .character-name {
     }
 }
 
-#mute-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #EAC67A;
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 20px;
-    transition: background 0.3s;
-}
-
-#mute-btn:hover {
-    background: rgba(255, 215, 0, 0.8);
-}
-
-
 
     </style>
 </head>
@@ -184,7 +166,7 @@ a, button, .copy-text, .character-name {
         </p>
         <button class="button" onclick="location.href='https://re1999.bluepoch.com/en/home/'">Reverse: 1999</button>
     </div>
-    <div id="mute-btn" onclick="toggleMute()">🔊</div>
+   
 
 
 
@@ -291,20 +273,7 @@ if (window.innerWidth <= 768) {
     document.body.style.scrollBehavior = "smooth";
 }
 </script>
-<script>
-let bgm = new Audio("1999bgm2.mp3");
-bgm.loop = true;
-bgm.volume = 0.3;
-bgm.play().catch(error => console.log("Autoplay blocked:", error));
 
-function toggleMute() {
-    if (bgm) { // Ensure bgm exists before muting
-        bgm.muted = !bgm.muted;
-        document.getElementById("mute-btn").textContent = bgm.muted ? "🔇" : "🔊";
-    }
-}
-
-</script>
 
 
 </body>
